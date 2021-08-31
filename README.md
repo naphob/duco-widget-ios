@@ -8,3 +8,9 @@ A [Duino Coin](https://duinocoin.com) nice widget for iOS using Scriptable app
 4. Change your username at the first line of the code.
 5. Save your file and rename it as you want
 6. Add your widget by select Scriptable app and select script name as above.
+
+## Examples
+### Small Widget
+![Small Widget](/images/small_widget.jpg)
+### Medium Widget
+![Medium Widget](/images/medium_widget.jpg)
