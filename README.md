@@ -1,5 +1,5 @@
 # duco-widget-ios
-A [Duino Coin](https://duinocoin.com) nice widget for iOS using Scriptable app
+A nice [Duino Coin](https://duinocoin.com) widget for iOS using Scriptable app
 
 ## Getting start
 1. Download [Scriptable](https://scriptable.app/) app from App Store.
