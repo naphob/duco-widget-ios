@@ -15,7 +15,7 @@ Script.complete()
 
 async function createWidget(api) {
   let appIcon = await loadAppIcon()
-  let title = "Dunio Coin"
+  let title = "Duino Coin"
   let widget = new ListWidget()
     // Add background gradient
   let gradient = new LinearGradient()
@@ -43,7 +43,7 @@ async function createWidget(api) {
   descriptionElement.minimumScaleFactor = 0.5
   descriptionElement.textColor = Color.white()
   descriptionElement.font = Font.boldSystemFont(24)
-   let minerElement = widget.addText("Miners: (" + api.miner +")")
+   let minerElement = widget.addText("Miners: " + api.miner)
   minerElement.textColor = Color.white()
   minerElement.textOpacity = 0.7
   minerElement.font = Font.systemFont(16)
