@@ -1,4 +1,4 @@
-let ducoUser = "YOUR USERNAME"
+let ducoUser = "YOUR USERNAME" //input your duino coin user here
 let api = await userData()
 let widget = await createWidget(api)
 
@@ -17,7 +17,7 @@ async function createWidget(api) {
   let appIcon = await loadAppIcon()
   let title = "Duino Coin"
   let widget = new ListWidget()
-    // Add background gradient
+  // Add background gradient
   let gradient = new LinearGradient()
   gradient.locations = [0, 1]
   gradient.colors = [
@@ -31,24 +31,31 @@ async function createWidget(api) {
   let titleStack = widget.addStack()
   let titleElement = titleStack.addText(title)
   titleElement.textColor = Color.white()
-  titleElement.textOpacity = 0.7
-  titleElement.font = Font.mediumSystemFont(13)
-  widget.addSpacer(12)
-  // Show API
+  titleElement.textOpacity = 0.8
+  titleElement.font = Font.mediumSystemFont(14)
+  widget.addSpacer(8)
+  // Show DUCO balance
   let nameElement = widget.addText(api.username + "'s balance")
   nameElement.textColor = Color.white()
   nameElement.font = Font.systemFont(18)
   widget.addSpacer(2)
-  let descriptionElement = widget.addText(api.balance.toFixed(2).toString()+" ᕲ")
-  descriptionElement.minimumScaleFactor = 0.5
-  descriptionElement.textColor = Color.white()
-  descriptionElement.font = Font.boldSystemFont(24)
-   let minerElement = widget.addText("Miners: " + api.miner)
-  minerElement.textColor = Color.white()
-  minerElement.textOpacity = 0.7
-  minerElement.font = Font.systemFont(16)
+  let balanceElement = widget.addText(api.balance.toFixed(2).toString() + " ᕲ")
+  //balanceElement.minimumScaleFactor = 0.5
+  balanceElement.textColor = Color.white()
+  balanceElement.font = Font.boldSystemFont(24)
+  widget.addSpacer(1)
+  let profitElement = widget.addText("≈ $" + api.profit.toFixed(2).toString())
+  profitElement.textColor = Color.white()
+  profitElement.textOpacity = 0.6
+  profitElement.font = Font.systemFont(13)
   widget.addSpacer(2)
-
+  // Show miners
+  let minerElement = widget.addText("Miners: " + api.miner)
+  minerElement.textColor = Color.white()
+  minerElement.textOpacity = 0.8
+  minerElement.font = Font.systemFont(16)
+  //widget.addSpacer(1)
+  // Show DUCO icon
   let appIconElement = widget.addImage(appIcon)
   appIconElement.imageSize = new Size(25, 25)
   appIconElement.cornerRadius = 4
@@ -62,15 +69,25 @@ async function userData() {
   let username = docs["result"]["balance"]["username"]
   let balance = docs["result"]["balance"]["balance"]
   let miner = docs["result"]["miners"].length
-  return {
+  let prices = await loadPrice() 
+  let pricing = prices["Duco price"]
+  let result = {
     username: username,
     balance: balance,
-    miner: miner
+    miner: miner,
+    profit: balance * pricing
   }
+  return result
 }
 
 async function loadDocs() {
-  let url = "https://server.duinocoin.com/users/"+ducoUser
+  let url = "https://server.duinocoin.com/users/" + ducoUser
+  let req = new Request(url)
+  return await req.loadJSON()
+}
+
+async function loadPrice() {
+  let url = "https://server.duinocoin.com/api.json"
   let req = new Request(url)
   return await req.loadJSON()
 }
@@ -80,3 +97,5 @@ async function loadAppIcon() {
   let req = new Request(url)
   return req.loadImage()
 }
+
+
