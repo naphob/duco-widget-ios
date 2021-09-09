@@ -11,7 +11,7 @@ A nice [Duino Coin](https://duinocoin.com) widget for iOS using Scriptable app
 
 ## Features
 1. Show DUCO balance.
-2. Background color's changed by DUCO amout. 
+2. Background color's changed by DUCO amount. 
 3. Account verification badge.
 4. Show how many miner is working.
 
